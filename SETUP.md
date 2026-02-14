@@ -3,7 +3,10 @@
 ## Prerequisites
 
 - **Node.js 18+** and npm
-- **OpenAI API Key** - Get yours at [https://platform.openai.com/api-keys](https://platform.openai.com/api-keys)
+- **Groq API Key** - **100% FREE!** Get yours at [https://console.groq.com/keys](https://console.groq.com/keys)
+  - No credit card required
+  - Generous free tier
+  - Super fast inference
 
 ## Installation Steps
 
@@ -18,14 +21,20 @@ npm install
 Create a `.env.local` file in the project root:
 
 ```bash
-cp .env.local.example .env.local
+cp .env.example .env.local
 ```
 
-Edit `.env.local` and add your OpenAI API key:
+Edit `.env.local` and add your Groq API key:
 
 ```
-OPENAI_API_KEY=sk-your-actual-api-key-here
+GROQ_API_KEY=gsk_your_actual_api_key_here
 ```
+
+**Getting your free Groq API key:**
+1. Visit [https://console.groq.com/keys](https://console.groq.com/keys)
+2. Sign up (no credit card needed)
+3. Click "Create API Key"
+4. Copy and paste into `.env.local`
 
 ### 3. Run Development Server
 
@@ -33,7 +42,7 @@ OPENAI_API_KEY=sk-your-actual-api-key-here
 npm run dev
 ```
 
-The app will be available at [http://localhost:3000](http://localhost:3000)
+The app will be available at [http://localhost:3001](http://localhost:3001)
 
 ## Usage
 

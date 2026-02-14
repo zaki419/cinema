@@ -1,20 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server';
-import OpenAI from 'openai';
+import Groq from 'groq-sdk';
 import { PresentationData } from '@/types/presentation';
 import { SYSTEM_PROMPT, generateUserPrompt } from '@/lib/ai/prompts';
 
-// Initialize OpenAI client (lazy to avoid build errors)
-let openaiClient: OpenAI | null = null;
+// Initialize Groq client (lazy to avoid build errors)
+let groqClient: Groq | null = null;
 
-function getOpenAIClient(): OpenAI {
-  if (!openaiClient) {
-    const apiKey = process.env.OPENAI_API_KEY || '';
+function getGroqClient(): Groq {
+  if (!groqClient) {
+    const apiKey = process.env.GROQ_API_KEY || '';
     if (!apiKey) {
-      throw new Error('OPENAI_API_KEY is not configured');
+      throw new Error('GROQ_API_KEY is not configured');
     }
-    openaiClient = new OpenAI({ apiKey });
+    groqClient = new Groq({ apiKey });
   }
-  return openaiClient;
+  return groqClient;
 }
 
 export async function POST(request: NextRequest) {
@@ -38,10 +38,10 @@ export async function POST(request: NextRequest) {
     };
     const targetSections = sectionCounts[length] || 12;
 
-    // Call OpenAI with structured output
-    const openai = getOpenAIClient();
-    const completion = await openai.chat.completions.create({
-      model: 'gpt-4o',
+    // Call Groq with structured output (using Llama 3.3 70B)
+    const groq = getGroqClient();
+    const completion = await groq.chat.completions.create({
+      model: 'llama-3.3-70b-versatile',
       messages: [
         {
           role: 'system',
@@ -54,12 +54,12 @@ export async function POST(request: NextRequest) {
       ],
       response_format: { type: 'json_object' },
       temperature: 0.7,
-      max_tokens: 4000
+      max_tokens: 8000
     });
 
     const content = completion.choices[0].message.content;
     if (!content) {
-      throw new Error('No content received from OpenAI');
+      throw new Error('No content received from AI');
     }
 
     // Parse and validate response
@@ -83,10 +83,10 @@ export async function POST(request: NextRequest) {
 
     // Handle specific error types
     if (error instanceof Error) {
-      // OpenAI API key errors
-      if (error.message.includes('API key') || error.message.includes('OPENAI_API_KEY')) {
+      // API key errors
+      if (error.message.includes('API key') || error.message.includes('GROQ_API_KEY')) {
         return NextResponse.json(
-          { error: 'OpenAI API key not configured. Please add OPENAI_API_KEY to .env.local file.' },
+          { error: 'Groq API key not configured. Please add GROQ_API_KEY to .env.local file.' },
           { status: 500 }
         );
       }
@@ -102,7 +102,7 @@ export async function POST(request: NextRequest) {
       // Rate limit errors
       if (error.message.includes('rate limit') || error.message.includes('429')) {
         return NextResponse.json(
-          { error: 'OpenAI rate limit reached. Please wait a moment and try again.' },
+          { error: 'Rate limit reached. Please wait a moment and try again.' },
           { status: 429 }
         );
       }

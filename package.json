@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "framer-motion": "^12.34.0",
+    "groq-sdk": "^0.37.0",
     "nanoid": "^5.1.6",
     "next": "16.0.1",
     "openai": "^6.21.0",

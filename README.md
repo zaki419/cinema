@@ -17,7 +17,9 @@ Transform ideas into immersive cinematic presentations. Unlike slide-based tools
 ### Prerequisites
 
 - Node.js 18+ and npm
-- OpenAI API key ([get one here](https://platform.openai.com/api-keys))
+- Groq API key - **100% FREE!** ([get one here](https://console.groq.com/keys))
+  - No credit card required
+  - Generous free tier with fast inference
 
 ### Installation
 
@@ -26,14 +28,14 @@ Transform ideas into immersive cinematic presentations. Unlike slide-based tools
 npm install
 
 # Set up environment variables
-cp .env.local.example .env.local
-# Edit .env.local and add your OPENAI_API_KEY
+cp .env.example .env.local
+# Edit .env.local and add your GROQ_API_KEY
 
 # Run development server
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to start creating presentations.
+Open [http://localhost:3001](http://localhost:3001) to start creating presentations.
 
 ## How It Works
 
@@ -64,7 +66,7 @@ The result:
 ### Core Systems
 
 1. **AI Generation Engine** (`src/app/api/generate/route.ts`)
-   - OpenAI GPT-4 with structured outputs
+   - Groq (Llama 3.3 70B) with structured outputs - 100% free!
    - Semantic section type assignment
    - Emotional profiling (formality, energy, seriousness, abstraction, urgency, optimism)
 
@@ -104,7 +106,7 @@ The result:
 - **React**: 19.2.0
 - **TypeScript**: 5.x
 - **Animations**: Framer Motion 11.x
-- **AI**: OpenAI GPT-4
+- **AI**: Groq (Llama 3.3 70B) - 100% free API
 - **Styling**: Tailwind CSS 4.0
 
 ## Project Structure
