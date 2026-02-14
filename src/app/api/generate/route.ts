@@ -65,8 +65,15 @@ export async function POST(request: NextRequest) {
     // Parse and validate response
     const presentationData: PresentationData = JSON.parse(content);
 
+    // Debug logging in development
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Received presentation data keys:', Object.keys(presentationData));
+      if (presentationData.meta) console.log('Meta keys:', Object.keys(presentationData.meta));
+    }
+
     // Basic validation
     if (!presentationData.meta || !presentationData.narrativeFlow) {
+      console.error('Invalid structure. Received:', JSON.stringify(presentationData, null, 2).substring(0, 500));
       throw new Error('Invalid presentation structure');
     }
 

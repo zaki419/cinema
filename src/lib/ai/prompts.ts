@@ -49,7 +49,58 @@ Tone: ${tone}
 Audience: ${audience}
 Target sections: ${targetSections}
 
-Generate ${targetSections} sections with varied emotional profiles, rich content, and compelling narrative flow.`;
+Generate ${targetSections} sections with varied emotional profiles, rich content, and compelling narrative flow.
+
+REQUIRED JSON SCHEMA:
+{
+  "meta": {
+    "title": "string",
+    "subtitle": "string (optional)",
+    "audience": "string",
+    "estimatedReadTime": "string (e.g., '8 minutes')",
+    "globalEmotionalProfile": {
+      "formality": number (0.0-1.0),
+      "energy": number (0.0-1.0),
+      "seriousness": number (0.0-1.0),
+      "abstraction": number (0.0-1.0),
+      "urgency": number (0.0-1.0),
+      "optimism": number (0.0-1.0)
+    }
+  },
+  "narrativeFlow": [
+    {
+      "id": "section-1",
+      "semanticType": "HeroStatement",
+      "importance": number (0.0-1.0),
+      "primaryIdea": "One sentence summary",
+      "cinematicSummary": "Visual/emotional description",
+      "content": {
+        "headline": "string",
+        "subheadline": "string (optional)",
+        "paragraphs": ["array of strings"],
+        "bullets": ["array of strings (optional)"],
+        "quote": "string (optional)",
+        "quoteAttribution": "string (optional)",
+        "statistic": {
+          "value": "string",
+          "label": "string"
+        }
+      },
+      "visualHints": {
+        "visualWeight": "sparse|medium|dense",
+        "preferredLayoutBias": "centered|split|grid|immersive|column"
+      },
+      "emotionalProfile": {
+        "formality": number,
+        "energy": number,
+        "seriousness": number,
+        "abstraction": number,
+        "urgency": number,
+        "optimism": number
+      }
+    }
+  ]
+}`;
 }
 
 export const SECTION_TYPES: SectionSemanticType[] = [
