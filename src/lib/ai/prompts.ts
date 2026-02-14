@@ -84,7 +84,9 @@ REQUIRED JSON SCHEMA:
         "statistic": {
           "value": "string",
           "label": "string"
-        }
+        },
+        "imageSuggestion": "2-4 word search keywords for background image (e.g., 'mars landscape sunset', 'modern technology', 'ocean waves')",
+        "imageStyle": "photo|illustration|minimal (choose best fit for section)"
       },
       "visualHints": {
         "visualWeight": "sparse|medium|dense",

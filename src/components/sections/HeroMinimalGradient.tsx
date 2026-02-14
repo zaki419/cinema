@@ -13,7 +13,7 @@ export default function HeroMinimalGradient({ section }: Props) {
 
   return (
     <SectionWrapper section={section}>
-      <div className="max-w-5xl mx-auto text-center">
+      <div className="max-w-5xl mx-auto text-center space-y-8">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -23,7 +23,7 @@ export default function HeroMinimalGradient({ section }: Props) {
             duration: 0.8,
             ease: 'easeOut'
           }}
-          className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight"
+          className="text-5xl md:text-7xl lg:text-9xl font-bold leading-[1.1] tracking-tight"
         >
           {content.headline}
         </motion.h1>
@@ -38,7 +38,8 @@ export default function HeroMinimalGradient({ section }: Props) {
               duration: 0.6,
               ease: 'easeOut'
             }}
-            className="text-xl md:text-2xl lg:text-3xl opacity-90 max-w-4xl mx-auto"
+            className="text-xl md:text-3xl lg:text-4xl opacity-90 max-w-4xl mx-auto leading-relaxed"
+            style={{ lineHeight: '1.6' }}
           >
             {content.subheadline}
           </motion.p>
